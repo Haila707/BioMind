@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./App.css";
 
+const API_URL = "https://biomind-j18k.onrender.com";
+
 function App() {
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
@@ -14,15 +16,14 @@ function App() {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/orchestrator/?request=${encodeURIComponent(
-          question
-        )}`,
+        `${API_URL}/orchestrator/?request=${encodeURIComponent(question)}`,
         {
           method: "POST",
         }
       );
 
       const data = await response.json();
+
       setResult(data);
 
     } catch (error) {
@@ -34,19 +35,19 @@ function App() {
   };
 
 
+  const confidenceValue = result?.confidence
+    ? Math.round(result.confidence * 100)
+    : 0;
+
+
   return (
     <div className="container">
 
       <div className="hero">
 
         <h1 className="logo">
-          <span className="bio">
-            Bio
-          </span>
-
-          <span className="mind">
-            Mind
-          </span>
+          <span className="bio">Bio</span>
+          <span className="mind">Mind</span>
         </h1>
 
 
@@ -126,16 +127,14 @@ function App() {
             <div
               className="circle"
               style={{
-                "--value": result
-                  ? Math.round(result.confidence * 100)
-                  : 0,
+                "--value": confidenceValue,
               }}
             >
 
               <div className="innerCircle">
 
                 {result
-                  ? `${Math.round(result.confidence * 100)}%`
+                  ? `${confidenceValue}%`
                   : "--"}
 
               </div>
@@ -149,10 +148,11 @@ function App() {
 
 
       </div>
+
+
       {loading && (
 
         <div className="card reportCard">
-
 
           <div className="loadingLogo">
 
@@ -177,8 +177,7 @@ function App() {
 
 
           <p>
-            Laboratory Agent, Research Agent and Healthcare Agent are working
-            together to build an evidence-based biomedical report.
+            Laboratory Agent, Research Agent and Healthcare Agent are working together to build an evidence-based biomedical report.
           </p>
 
 
@@ -201,34 +200,28 @@ function App() {
 
           <div className="section">
 
-
             <h3>
               🧪 Laboratory Analysis
             </h3>
-
 
             <p>
               {result.analysis}
             </p>
 
-
           </div>
 
 
 
 
           <div className="section">
-
 
             <h3>
               📚 Scientific Evidence
             </h3>
 
-
             <p>
               {result.scientific_evidence}
             </p>
-
 
           </div>
 
@@ -237,17 +230,14 @@ function App() {
 
 
           <div className="section">
-
 
             <h3>
               🏥 Healthcare Recommendation
             </h3>
 
-
             <p>
               {result.healthcare_recommendation}
             </p>
-
 
           </div>
 
@@ -256,7 +246,6 @@ function App() {
 
 
           <div className="section">
-
 
             <h3>
               🎯 Overall Confidence
@@ -265,29 +254,27 @@ function App() {
 
             <div className="confidence">
 
-
               <div
                 className="circle"
                 style={{
-                  "--value": Math.round(result.confidence * 100),
+                  "--value": confidenceValue,
                 }}
               >
 
-
                 <div className="innerCircle">
 
-                  {Math.round(result.confidence * 100)}%
+                  {confidenceValue}%
 
                 </div>
 
-
               </div>
-
 
             </div>
 
-
           </div>
+
+
+
           <div className="section">
 
             <h3>
@@ -295,27 +282,21 @@ function App() {
             </h3>
 
 
-            {result.references.length === 0 ? (
+            {!result.references || result.references.length === 0 ? (
 
               <p>
                 No references available.
               </p>
 
-
             ) : (
-
 
               <ul>
 
-
                 {result.references.map((ref, index) => (
-
 
                   <li key={index}>
 
-
                     {ref.url ? (
-
 
                       <a
                         href={ref.url}
@@ -327,45 +308,31 @@ function App() {
                           {ref.source}
                         </strong>
 
-
                         {ref.title
                           ? ` - ${ref.title}`
                           : ""}
 
-
                       </a>
-
 
                     ) : (
 
-
                       <>
-
-
                         <strong>
                           {ref.source}
                         </strong>
 
-
                         {ref.title
                           ? ` - ${ref.title}`
                           : ""}
-
-
                       </>
-
 
                     )}
 
-
                   </li>
-
 
                 ))}
 
-
               </ul>
-
 
             )}
 
@@ -374,7 +341,6 @@ function App() {
 
 
         </div>
-
 
       )}
 
