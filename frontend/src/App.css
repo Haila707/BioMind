@@ -22,9 +22,6 @@ body{
 }
 
 
-/* ================= MAIN CONTAINER ================= */
-
-
 .container{
 
     width:100%;
@@ -44,8 +41,7 @@ body{
 
 
 
-/* ================= HERO ================= */
-
+/* HERO */
 
 .hero{
 
@@ -63,8 +59,7 @@ body{
 
 
 
-/* ================= BIOMIND LOGO ================= */
-
+/* LOGO */
 
 .logo{
 
@@ -85,9 +80,6 @@ body{
 }
 
 
-/* Bio color */
-
-
 .logo .bio{
 
     color:#ff9fcf;
@@ -96,9 +88,6 @@ body{
     0 8px 25px rgba(255,159,207,.35);
 
 }
-
-
-/* Mind color */
 
 
 .logo .mind{
@@ -111,7 +100,6 @@ body{
 }
 
 
-
 .logo:hover{
 
     transform:scale(1.05);
@@ -120,8 +108,7 @@ body{
 
 
 
-/* ================= SUB TITLES ================= */
-
+/* SUB TITLES */
 
 .subtitle{
 
@@ -135,10 +122,7 @@ body{
 
     margin-bottom:12px;
 
-    letter-spacing:.5px;
-
 }
-
 
 
 .subtitle2{
@@ -152,8 +136,8 @@ body{
 }
 
 
-/* ================= SEARCH ================= */
 
+/* SEARCH */
 
 .searchBox{
 
@@ -181,7 +165,13 @@ body{
 
     border-radius:18px;
 
-    background:white;
+
+    /* تم التعديل هنا فقط */
+
+    background:#102a63;
+
+    color:white;
+
 
     font-size:17px;
 
@@ -190,11 +180,18 @@ body{
 
     box-shadow:
 
-    0 15px 35px rgba(16,42,99,.10);
+    0 15px 35px rgba(16,42,99,.25);
 
 
     transition:.3s;
 
+
+}
+
+
+.searchBox input::placeholder{
+
+    color:#d9e2f5;
 
 }
 
@@ -265,7 +262,10 @@ body{
 
 
 }
-/* ================= CARDS ================= */
+
+
+
+/* CARDS */
 
 .cards{
 
@@ -309,11 +309,7 @@ body{
 
     transform:translateY(-8px);
 
-    box-shadow:
-    0 22px 50px rgba(16,42,99,.14);
-
 }
-
 
 
 .card h2{
@@ -323,7 +319,6 @@ body{
     margin-bottom:18px;
 
 }
-
 
 
 .card h3{
@@ -337,7 +332,6 @@ body{
 }
 
 
-
 .card p{
 
     line-height:1.9;
@@ -348,7 +342,7 @@ body{
 
 
 
-/* ================= REPORT ================= */
+/* REPORT */
 
 .reportCard{
 
@@ -360,7 +354,7 @@ body{
 
 
 
-/* ================= LOADING ================= */
+/* LOADING */
 
 .loadingLogo{
 
@@ -373,7 +367,6 @@ body{
     margin-bottom:22px;
 
 }
-
 
 
 .loadingText{
@@ -389,13 +382,11 @@ body{
 }
 
 
-
 .loadingText .bio{
 
     color:#ff9fcf;
 
 }
-
 
 
 .loadingText .mind{
@@ -405,26 +396,21 @@ body{
 }
 
 
-
 @keyframes spinLogo{
 
     0%{
-
         transform:rotate(0deg);
-
     }
 
     100%{
-
         transform:rotate(360deg);
-
     }
 
 }
 
 
 
-/* ================= REPORT SECTIONS ================= */
+/* REPORT SECTIONS */
 
 .section{
 
@@ -441,7 +427,6 @@ body{
 }
 
 
-
 .section h3{
 
     color:#102a63;
@@ -451,7 +436,6 @@ body{
 }
 
 
-
 .section p{
 
     white-space:pre-wrap;
@@ -459,7 +443,10 @@ body{
     line-height:1.9;
 
 }
-/* ================= CONFIDENCE ================= */
+
+
+
+/* CONFIDENCE */
 
 .confidence{
 
@@ -479,6 +466,7 @@ body{
     --value:0;
 
     width:150px;
+
     height:150px;
 
     border-radius:50%;
@@ -489,20 +477,21 @@ body{
         #e7edf8 0
     );
 
+
     display:flex;
 
     justify-content:center;
 
     align-items:center;
 
-    transition:.5s;
-
 }
+
 
 
 .innerCircle{
 
     width:118px;
+
     height:118px;
 
     border-radius:50%;
@@ -521,14 +510,11 @@ body{
 
     color:#102a63;
 
-    box-shadow:
-    inset 0 0 18px rgba(16,42,99,.08);
-
 }
 
 
 
-/* ================= REFERENCES ================= */
+/* REFERENCES */
 
 ul{
 
@@ -559,15 +545,8 @@ a{
 }
 
 
-a:hover{
 
-    text-decoration:underline;
-
-}
-
-
-
-/* ================= RESPONSIVE ================= */
+/* MOBILE */
 
 @media(max-width:900px){
 
@@ -575,9 +554,8 @@ a:hover{
 
         font-size:56px;
 
-        letter-spacing:-2px;
-
     }
+
 
     .loadingText{
 
@@ -585,11 +563,13 @@ a:hover{
 
     }
 
+
     .subtitle{
 
         font-size:22px;
 
     }
+
 
     .subtitle2{
 
@@ -597,11 +577,13 @@ a:hover{
 
     }
 
+
     .searchBox{
 
         flex-direction:column;
 
     }
+
 
     .searchBox button{
 
@@ -609,16 +591,20 @@ a:hover{
 
     }
 
+
     .circle{
 
         width:120px;
+
         height:120px;
 
     }
 
+
     .innerCircle{
 
         width:92px;
+
         height:92px;
 
         font-size:24px;
