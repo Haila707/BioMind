@@ -13,26 +13,36 @@ from app.models.user import User
 from app.models.agent import Agent
 
 
+# إنشاء الجداول
 Base.metadata.create_all(bind=engine)
 
 
 # تحديث جدول agents الموجود بدون حذف البيانات
 with engine.connect() as connection:
+
     try:
-        connection.execute(text(
-            "ALTER TABLE agents ADD COLUMN status VARCHAR DEFAULT 'active'"
-        ))
+        connection.execute(
+            text(
+                "ALTER TABLE agents ADD COLUMN status VARCHAR DEFAULT 'active'"
+            )
+        )
         connection.commit()
+
     except Exception:
         pass
 
+
     try:
-        connection.execute(text(
-            "ALTER TABLE agents ADD COLUMN capabilities VARCHAR"
-        ))
+        connection.execute(
+            text(
+                "ALTER TABLE agents ADD COLUMN capabilities VARCHAR"
+            )
+        )
         connection.commit()
+
     except Exception:
         pass
+
 
 
 app = FastAPI(
@@ -41,27 +51,38 @@ app = FastAPI(
     version="1.0.0"
 )
 
+
+
 # السماح للـ Frontend بالاتصال بالـ Backend
 app.add_middleware(
     CORSMiddleware,
+
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        "https://bio-mind.vercel.app",
     ],
+
     allow_credentials=True,
+
     allow_methods=["*"],
+
     allow_headers=["*"],
 )
 
 
+
+# Routers
 app.include_router(samples_router)
 app.include_router(users_router)
 app.include_router(agents_router)
 app.include_router(orchestrator_router)
 
 
+
 @app.get("/")
 def home():
+
     return {
         "message": "BioMind is running",
         "status": "active"
