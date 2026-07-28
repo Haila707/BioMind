@@ -5,6 +5,9 @@ class WHOService:
 
     SEARCH_URL = "https://www.who.int/search"
 
+    def search(self, query: str):
+        return self.search_articles(query)
+
     def search_articles(self, query: str):
 
         try:
@@ -18,7 +21,6 @@ class WHOService:
             )
 
             if response.status_code != 200:
-
                 return []
 
             return [

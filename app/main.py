@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import text
 
 from app.api.samples import router as samples_router
@@ -38,6 +39,18 @@ app = FastAPI(
     title="BioMind",
     description="AI Scientific Decision Support Platform",
     version="1.0.0"
+)
+
+# السماح للـ Frontend بالاتصال بالـ Backend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 

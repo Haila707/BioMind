@@ -17,6 +17,8 @@ class ResearchAgent:
 
     def process(self, request: str, laboratory_result: dict):
 
+        print("\n========== RESEARCH AGENT START ==========")
+
         # Analyze medical request
         medical_query = self.analyzer.analyze(request)
 
@@ -75,25 +77,20 @@ NICE:
 
 ClinicalTrials:
 {evidence["clinical_trials"]}
-
-Instructions:
-
-- Review the laboratory analysis carefully.
-- Use ONLY the supplied scientific evidence.
-- Never invent references.
-- Never mention papers that are not supplied.
-- Compare evidence across different organizations.
-- Mention agreement or disagreement if present.
-- If evidence is insufficient, clearly explain why.
-- Write in professional biomedical language.
-- Cite only the supplied references.
 """
+
+        print("=" * 70)
+        print("Prompt Length:", len(prompt))
+        print("=" * 70)
+
+        print(">>>>>>>>>> CALLING OLLAMA <<<<<<<<<<")
 
         ai_response = self.ai.generate(prompt)
 
+        print(">>>>>>>>>> OLLAMA FINISHED <<<<<<<<<<")
+        print("AI Response Length:", len(ai_response))
         print("=" * 70)
-        print("References Returned")
-        print("Total:", len(all_references))
+        print("RESEARCH AGENT FINISHED")
         print("=" * 70)
 
         return {
